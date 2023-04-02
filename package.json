@@ -1,0 +1,35 @@
+{
+  "name": "@hexlet/code",
+  "version": "1.0.0",
+  "description": "calculator of differences in configuration files",
+  "private": true,
+  "main": "index.js",
+  "type": "module",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "bin": {
+    "gendiff": "bin/gendiff.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Sinsstranger/fullstack-javascript-project-46.git"
+  },
+  "keywords": [
+    "diff",
+    "yaml",
+    "json"
+  ],
+  "author": "sinstranger<sinstranger@yandex.ru>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/Sinsstranger/fullstack-javascript-project-46/issues"
+  },
+  "homepage": "https://github.com/Sinsstranger/fullstack-javascript-project-46#readme",
+  "dependencies": {
+    "commander": "^10.0.0",
+    "eslint": "^8.37.0",
+    "eslint-config-airbnb-base": "^15.0.0",
+    "eslint-plugin-import": "^2.27.5"
+  }
+}
