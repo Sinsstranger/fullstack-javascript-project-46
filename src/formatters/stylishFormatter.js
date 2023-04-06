@@ -30,7 +30,7 @@ const stylish = (innerTree) => {
           return getValue(node.value, " ");
         case "updated":
           return `${getValue(node.value1, "-")}${getValue(node.value2, "+")}`;
-        case "recursion":
+        case "children":
           return `${indent(depth)}  ${node.key}: {${EOL}${iter(
             node.children,
             depth + 1
