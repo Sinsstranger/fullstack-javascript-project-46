@@ -19,26 +19,33 @@ const iter = (tree, depth) =>
   tree.map((node) => {
     const getValue = (value, sym) =>
       `${indent(depth)}${sym} ${node.key}: ${stringify(value, depth)}${EOL}`;
+    let result = {};
     switch (node.type) {
       case "added":
-        return getValue(node.value, "+");
+        result = getValue(node.value, "+");
+        break;
       case "deleted":
-        return getValue(node.value, "-");
+        result = getValue(node.value, "-");
+        break;
       case "equal":
-        return getValue(node.value, " ");
+        result = getValue(node.value, " ");
+        break;
       case "updated":
-        return `${getValue(node.dataOneValue, "-")}${getValue(
+        result = `${getValue(node.dataOneValue, "-")}${getValue(
           node.dataTwoValue,
           "+"
         )}`;
+        break;
       case "children":
-        return `${indent(depth)}  ${node.key}: {${EOL}${iter(
+        result = `${indent(depth)}  ${node.key}: {${EOL}${iter(
           node.children,
           depth + 1
         ).join("")}${indent(depth)}  }${EOL}`;
+        break;
       default:
         throw new Error("Wrong node Type!");
     }
+    return result;
   });
 
 const stylish = (innerTree) => `{${EOL}${iter(innerTree, 1).join("")}}`;
