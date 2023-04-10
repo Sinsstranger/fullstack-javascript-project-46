@@ -27,7 +27,10 @@ const iter = (tree, depth) =>
       case "equal":
         return getValue(node.value, " ");
       case "updated":
-        return `${getValue(node.value1, "-")}${getValue(node.value2, "+")}`;
+        return `${getValue(node.dataOneValue, "-")}${getValue(
+          node.dataTwoValue,
+          "+"
+        )}`;
       case "children":
         return `${indent(depth)}  ${node.key}: {${EOL}${iter(
           node.children,
