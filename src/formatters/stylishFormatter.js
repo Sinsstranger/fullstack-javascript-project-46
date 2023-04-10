@@ -15,42 +15,35 @@ const stringify = (data, treeDepth) => {
   );
   return ["{", ...newObj, `${indent(treeDepth)}  }`].join(EOL);
 };
-const getValue = (key, value, sym, currentDepth) =>
-  `${indent(currentDepth)}${sym} ${key}: ${stringify(
+const getValue = (value, sym, currentDepth) =>
+  `${indent(currentDepth)}${sym} ${node.key}: ${stringify(
     value,
     currentDepth
   )}${EOL}`;
 const iter = (tree, depth) =>
   tree.map((node) => {
-    let result = {};
     switch (node.type) {
       case "added":
-        result = getValue(node.key, node.value, "+", depth);
-        break;
+        return getValue(node.key, node.value, "+", depth);
       case "deleted":
-        result = getValue(node.key, node.value, "-", depth);
-        break;
+        return getValue(node.key, node.value, "-", depth);
       case "equal":
-        (result = getValuenode.key), (node.value, " ", depth);
-        break;
+        return getValue(node.key, node.value, " ", depth);
       case "updated":
-        result = `${getValue(
+        return `${getValue(node.key, node.dataOneValue, "-", depth)}${getValue(
           node.key,
-          node.dataOneValue,
-          "-",
+          node.dataTwoValue,
+          "+",
           depth
-        )}${getValue(node.key, node.dataTwoValue, "+", depth)}`;
-        break;
+        )}`;
       case "children":
-        result = `${indent(depth)}  ${node.key}: {${EOL}${iter(
+        return `${indent(depth)}  ${node.key}: {${EOL}${iter(
           node.children,
           depth + 1
         ).join("")}${indent(depth)}  }${EOL}`;
-        break;
       default:
         throw new Error("Wrong node Type!");
     }
-    return result;
   });
 
 const stylish = (innerTree) => `{${EOL}${iter(innerTree, 1).join("")}}`;
