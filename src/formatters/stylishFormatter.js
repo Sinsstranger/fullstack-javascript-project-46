@@ -15,8 +15,8 @@ const stringify = (data, treeDepth) => {
   );
   return ["{", ...newObj, `${indent(treeDepth)}  }`].join(EOL);
 };
-const getValue = (value, sym, currentDepth) =>
-  `${indent(currentDepth)}${sym} ${node.key}: ${stringify(
+const getValue = (key, value, sym, currentDepth) =>
+  `${indent(currentDepth)}${sym} ${key}: ${stringify(
     value,
     currentDepth
   )}${EOL}`;
