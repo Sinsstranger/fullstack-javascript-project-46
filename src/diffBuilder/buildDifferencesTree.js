@@ -7,23 +7,23 @@ const buildDifferencesTree = (dataOne, dataTwo) => {
   return keysHeep.map((key) => {
     const dataOneValue = dataOne[key];
     const dataTwoValue = dataTwo[key];
+    let diff = {};
     if (!_.has(dataOne, key)) {
-      return { type: "added", key, value: dataTwoValue };
-    }
-    if (!_.has(dataTwo, key)) {
-      return { type: "deleted", key, value: dataOneValue };
-    }
-    if (!_.isEqual(dataOneValue, dataTwoValue)) {
-      return { type: "updated", key, dataOneValue, dataTwoValue };
-    }
-    if (_.isObject(dataOneValue) && _.isObject(dataTwoValue)) {
-      return {
+      diff = { type: "added", key, value: dataTwoValue };
+    } else if (!_.has(dataTwo, key)) {
+      diff = { type: "deleted", key, value: dataOneValue };
+    } else if (!_.isEqual(dataOneValue, dataTwoValue)) {
+      diff = { type: "updated", key, dataOneValue, dataTwoValue };
+    } else if (_.isObject(dataOneValue) && _.isObject(dataTwoValue)) {
+      diff = {
         type: "children",
         key,
         children: buildDifferencesTree(dataOneValue, dataTwoValue),
       };
+    } else {
+      diff = { type: "equal", key, value: dataOneValue };
     }
-    return { type: "equal", key, value: dataOneValue };
+    return diff;
   });
 };
 

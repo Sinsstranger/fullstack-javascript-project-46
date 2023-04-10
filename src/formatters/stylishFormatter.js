@@ -15,26 +15,31 @@ const stringify = (data, treeDepth) => {
   );
   return ["{", ...newObj, `${indent(treeDepth)}  }`].join(EOL);
 };
+const getValue = (key, value, sym, currentDepth) =>
+  `${indent(currentDepth)}${sym} ${key}: ${stringify(
+    value,
+    currentDepth
+  )}${EOL}`;
 const iter = (tree, depth) =>
   tree.map((node) => {
-    const getValue = (value, sym) =>
-      `${indent(depth)}${sym} ${node.key}: ${stringify(value, depth)}${EOL}`;
     let result = {};
     switch (node.type) {
       case "added":
-        result = getValue(node.value, "+");
+        result = getValue(node.key, node.value, "+", depth);
         break;
       case "deleted":
-        result = getValue(node.value, "-");
+        result = getValue(node.key, node.value, "-", depth);
         break;
       case "equal":
-        result = getValue(node.value, " ");
+        (result = getValuenode.key), (node.value, " ", depth);
         break;
       case "updated":
-        result = `${getValue(node.dataOneValue, "-")}${getValue(
-          node.dataTwoValue,
-          "+"
-        )}`;
+        result = `${getValue(
+          node.key,
+          node.dataOneValue,
+          "-",
+          depth
+        )}${getValue(node.key, node.dataTwoValue, "+", depth)}`;
         break;
       case "children":
         result = `${indent(depth)}  ${node.key}: {${EOL}${iter(
