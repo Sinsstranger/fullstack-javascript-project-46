@@ -2,7 +2,7 @@ import _ from "lodash";
 import plainFormatter from "./plainFormatter.js";
 import stylishFormatter from "./stylishFormatter.js";
 
-const formatter = (diffTree, outputFormat) => {
+const formatter = (diffTree, outputFormat = 'stylish') => {
   const formats = {
     stylish: stylishFormatter,
     json: JSON.stringify,
