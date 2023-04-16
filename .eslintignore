@@ -1,0 +1,9 @@
+src/compare.js
+src/formatters/plain.js
+src/index.js
+__tests__/index.test.js
+bin/gendiff.js
+src/parsers/parsing.js
+src/formatting/stylish.js
+src/formatters/index.js
+src/formatters/stylish.js

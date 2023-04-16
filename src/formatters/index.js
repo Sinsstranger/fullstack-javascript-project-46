@@ -1,20 +1,11 @@
-import _ from "lodash";
-import plainFormatter from "./plainFormatter.js";
-import stylishFormatter from "./stylishFormatter.js";
+import plain from './plain.js';
+import stylish from './stylish.js';
 
-const formatter = (diffTree, outputFormat = 'stylish') => {
-  const formats = {
-    stylish: stylishFormatter,
-    json: JSON.stringify,
-    plain: plainFormatter,
-    error: () => {
-      throw new Error(`Unsupported output format!`);
-    },
-  };
-  if (!_.has(formats, outputFormat)) {
-    formats.error();
-  }
-  return formats[outputFormat](diffTree);
+const format = (tree, formatName) => {
+  if (formatName === 'stylish') return stylish(tree);
+  if (formatName === 'plain') return plain(tree);
+  if (formatName === 'json') return JSON.stringify(tree);
+  return Error('Error');
 };
 
-export default formatter;
+export default format;
