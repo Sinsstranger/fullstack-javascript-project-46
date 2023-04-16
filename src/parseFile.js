@@ -6,7 +6,7 @@ const parseFile = (thePath) => {
   const fileExtension = getFileExtension(resolvePath(thePath));
   const rawFileData = fs.readFileSync(resolvePath(thePath), "utf-8");
 
-  if (!/^(?:json|yam?l)$/.test(fileExtension)) {
+  if (!/^(?:json|ya?ml)$/.test(fileExtension)) {
     throw new Error(`Unsupported filetype: ${fileExtension}`);
   }
   if(/^yam?l$/.test(fileExtension)){
