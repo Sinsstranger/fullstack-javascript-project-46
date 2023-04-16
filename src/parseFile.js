@@ -9,7 +9,7 @@ const parseFile = (thePath) => {
   if (!/^(?:json|ya?ml)$/.test(fileExtension)) {
     throw new Error(`Unsupported filetype: ${fileExtension}`);
   }
-  if(/^yam?l$/.test(fileExtension)){
+  if(/^ya?ml$/.test(fileExtension)){
     return yaml.load(rawFileData);
   }
   return JSON.parse(rawFileData);
